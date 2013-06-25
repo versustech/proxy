@@ -32,8 +32,7 @@ ActionDispatch::Callbacks.before do |dispatcher|
   Proxy.send :before_dispatch, dispatcher
 end
 
-ActionController::AbstractRequest = ActionController::Request if defined?(ActionController::Request)
-ActionController::AbstractRequest.send :include, Proxy::ActionController::AbstractRequest
+ActionDispatch::Request.send :include, Proxy::ActionController::AbstractRequest
 ActionController::Base.send :include, Proxy::ActionController::Base
 ActionController::Routing::RouteSet::NamedRouteCollection.send :include, Proxy::ActionController::NamedRouteCollection
 ActionController::UrlRewriter.send :include, Proxy::ActionController::UrlRewriter
